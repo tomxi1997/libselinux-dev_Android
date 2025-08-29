@@ -28,7 +28,7 @@ static void customizable_init(void)
 		fclose(fp);
 		return;
 	}
-	while (fgets_unlocked(buf, selinux_page_size, fp) && ctr < UINT_MAX) {
+	while (fgets(buf, selinux_page_size, fp) && ctr < UINT_MAX) {
 		ctr++;
 	}
 	rewind(fp);
