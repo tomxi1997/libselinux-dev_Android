@@ -62,7 +62,11 @@ jobs:
         export TARGET=${{ steps.vars.outputs.target }}
         export API=${{ steps.vars.outputs.api }}
         export PKG_CONFIG_PATH=/data/sysroot/lib/pkgconfig:$PKG_CONFIG_PATH
-
+        
+        sed -i 's/fgets_unlocked/fgets/g' $(find . -name "*.c")
+        echo "✅ 替换完成，检查残留："
+        grep -r "fgets_unlocked" $(find . -name "*.c") || echo "✅ 无残留 fgets_unlocked"
+        
         make -C libselinux LIBDIR=/data/sysroot/lib SHLIBDIR=/data/sysroot/lib CC="$NDK_TOOLCHAIN/clang --target=$TARGET$API" \
         AR=$NDK_TOOLCHAIN/llvm-ar RANLIB=$NDK_TOOLCHAIN/llvm-ranlib PREFIX=/data/sysroot LDFLAGS=" -Wl,--undefined-version" \
         CFLAGS="-I/data/sysroot/include -I../../libselinux/include"
