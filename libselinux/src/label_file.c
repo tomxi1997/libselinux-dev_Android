@@ -621,7 +621,7 @@ static int selabel_subs_init(const char *path, struct selabel_digest *digest,
 	if (fstat(fileno(cfg), &sb) < 0)
 		goto out;
 
-	while (fgets_unlocked(buf, sizeof(buf) - 1, cfg)) {
+	while (fgets(buf, sizeof(buf) - 1, cfg)) {
 		char *ptr = NULL;
 		char *src = buf;
 		char *dst = NULL;
