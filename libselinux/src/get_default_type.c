@@ -34,7 +34,7 @@ static int find_default_type(FILE * fp, const char *role, char **type)
 
 	len = strlen(role);
 	while (!feof_unlocked(fp)) {
-		if (!fgets_unlocked(buf, sizeof buf, fp)) {
+		if (!fgets(buf, sizeof buf, fp)) {
 			errno = EINVAL;
 			return -1;
 		}
