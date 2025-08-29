@@ -38,7 +38,7 @@ static void customizable_init(void)
 						  ctr + 1);
 		if (list) {
 			i = 0;
-			while (fgets_unlocked(buf, selinux_page_size, fp)
+			while (fgets(buf, selinux_page_size, fp)
 			       && i < ctr) {
 				buf[strlen(buf) - 1] = 0;
 				list[i] = strdup(buf);
